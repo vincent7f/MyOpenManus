@@ -1,0 +1,34 @@
+# Global LLM configuration
+[llm]
+
+### offical settings
+# model = "claude-3-5-sonnet"
+# base_url = "https://api.openai.com/v1"
+# api_key = "sk-..."
+# max_tokens = 4096
+# temperature = 0.0
+
+# model要支持instruct的，例如deepseek R1不能用，qwen2.5可以使用
+# model = "qwen2.5-coder:14b-instruct-q5_K_S"
+model = "qwen2.5:7b"
+# 注意，URL后边多了一个"/v1"
+base_url = "http://127.0.0.1:11434/v1"
+# 调用Ollama时，这个api_key不能为空，否则报错
+api_key = "ollama"
+max_tokens = 4096
+temperature = 0.0
+
+# [llm] #AZURE OPENAI:
+# api_type= 'azure'
+# model = "YOUR_MODEL_NAME" #"gpt-4o-mini"
+# base_url = "{YOUR_AZURE_ENDPOINT.rstrip('/')}/openai/deployments/{AZURE_DEPOLYMENT_ID}"
+# api_key = "AZURE API KEY"
+# max_tokens = 8096
+# temperature = 0.0
+# api_version="AZURE API VERSION" #"2024-08-01-preview"
+
+# Optional configuration for specific LLM models
+[llm.vision]
+model = "claude-3-5-sonnet"
+base_url = "https://api.openai.com/v1"
+api_key = "sk-..."

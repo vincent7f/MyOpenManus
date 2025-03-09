@@ -1,4 +1,4 @@
-English | [中文](README_zh.md) | [한국어](README_ko.md) | [日本語](README_ja.md)
+English | [中文](README_zh.md)
 
 NOTE: This page is generated and translated by Cursor.
 

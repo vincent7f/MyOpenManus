@@ -1,11 +1,11 @@
 import asyncio
 
-from app.agent.manus import Manus
+from app.agent.mymanus import MyManus
 from app.logger import logger
 
 
 async def main():
-    agent = Manus()
+    agent = MyManus()
     while True:
         try:
             prompt = input("Enter your prompt (or 'exit'/'quit' to quit): ")

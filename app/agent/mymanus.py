@@ -27,7 +27,22 @@ class MyManus(ToolCallAgent):
     )
 
     system_prompt: str = SYSTEM_PROMPT
+<<<<<<< HEAD
     next_step_prompt: str = None
+=======
+    next_step_prompt: str = """You can interact with the computer using PythonExecute, save important content and information files through FileSaver, open browsers with BrowserUseTool, and retrieve information using GoogleSearch.
+
+PythonExecute: Execute Python code to interact with the computer system, data processing, automation tasks, etc.
+
+FileSaver: Save files locally, such as txt, py, html, etc.
+
+BrowserUseTool: Open, browse, and use web browsers.If you open a local HTML file, you must provide the absolute path to the file.
+
+GoogleSearch: Perform web information retrieval
+
+Based on user needs, proactively select the most appropriate tool or combination of tools. For complex tasks, you can break down the problem and use different tools step by step to solve it. After using each tool, clearly explain the execution results and suggest the next steps.
+"""
+>>>>>>> 9a3f545 (feat: Enhance tool description and dynamic prompt generation)
 
     # Add general-purpose tools to the tool collection
     available_tools: ToolCollection = Field(

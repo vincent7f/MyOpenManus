@@ -12,8 +12,7 @@ def log_config_info():
     logger.info(f"Default LLM model: {default_settings.model}")
     logger.info(f"Default LLM base URL: {default_settings.base_url}")
     logger.info(f"Default LLM max tokens: {default_settings.max_tokens}")
-    logger.info(f"Default LLM temperature: {default_settings.temperature}")
-    logger.info(f"Default LLM API type: {default_settings.api_type}")
+    logger.info(f"Default LLM temperature: {default_settings.temperature}")    
     
     # 记录LLM覆盖配置
     llm_overrides = {k: v for k, v in config.llm.items() if k != "default"}

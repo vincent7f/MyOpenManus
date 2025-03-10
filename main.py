@@ -29,7 +29,10 @@ def log_config_info():
         logger.info("No tools enabled")
 
 async def main():
-    agent = Manus()
+    # log config info
+    log_config_info()
+    
+    agent = MyManus()
     try:
         prompt = input("Enter your prompt: ")
         if not prompt.strip():

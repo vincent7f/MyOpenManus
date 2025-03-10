@@ -117,6 +117,7 @@ class Bash(BaseTool):
     """A tool for executing bash commands"""
 
     name: str = "bash"
+    short_description: str = "Execute a bash command in the terminal."
     description: str = _BASH_DESCRIPTION
     parameters: dict = {
         "type": "object",

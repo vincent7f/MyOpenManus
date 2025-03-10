@@ -36,6 +36,7 @@ content extraction, and tab management. Supported actions include:
 
 class BrowserUseTool(BaseTool):
     name: str = "browser_use"
+    short_description: str = "Open, browse, and use web browsers.If you open a local HTML file, you must provide the absolute path to the file."
     description: str = _BROWSER_DESCRIPTION
     parameters: dict = {
         "type": "object",

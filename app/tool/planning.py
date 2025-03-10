@@ -18,6 +18,7 @@ class PlanningTool(BaseTool):
     """
 
     name: str = "planning"
+    short_description: str = "Create and manage plans for solving complex tasks."
     description: str = _PLANNING_TOOL_DESCRIPTION
     parameters: dict = {
         "type": "object",

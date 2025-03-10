@@ -7,6 +7,7 @@ When you have finished all the tasks, call this tool to end the work."""
 
 class Terminate(BaseTool):
     name: str = "terminate"
+    short_description: str = "Terminate the interaction when the request is met OR if the assistant cannot proceed further with the task."
     description: str = _TERMINATE_DESCRIPTION
     parameters: dict = {
         "type": "object",

@@ -6,6 +6,7 @@ from pydantic import BaseModel, Field
 
 class BaseTool(ABC, BaseModel):
     name: str
+    short_description: str # one line description
     description: str
     parameters: Optional[dict] = None
 

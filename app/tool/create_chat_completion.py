@@ -7,6 +7,7 @@ from app.tool import BaseTool
 
 class CreateChatCompletion(BaseTool):
     name: str = "create_chat_completion"
+    short_description: str = "Creates a structured completion with specified output formatting."
     description: str = (
         "Creates a structured completion with specified output formatting."
     )

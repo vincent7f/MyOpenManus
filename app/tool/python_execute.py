@@ -8,6 +8,7 @@ class PythonExecute(BaseTool):
     """A tool for executing Python code with timeout and safety restrictions."""
 
     name: str = "python_execute"
+    short_description: str = "Execute Python code to interact with the computer system, data processing, automation tasks, etc."
     description: str = "Executes Python code string. Note: Only print outputs are visible, function return values are not captured. Use print statements to see results."
     parameters: dict = {
         "type": "object",

@@ -8,6 +8,7 @@ from app.tool.base import BaseTool
 
 class GoogleSearch(BaseTool):
     name: str = "google_search"
+    short_description: str = "Perform web information retrieval"
     description: str = """Perform a Google search and return a list of relevant links.
 Use this tool when you need to find information on the web, get up-to-date data, or research specific topics.
 The tool returns a list of URLs that match the search query.

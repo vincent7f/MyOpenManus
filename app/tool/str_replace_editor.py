@@ -48,6 +48,7 @@ class StrReplaceEditor(BaseTool):
     """A tool for executing bash commands"""
 
     name: str = "str_replace_editor"
+    short_description: str = "Custom editing tool for viewing, creating and editing files"
     description: str = _STR_REPLACE_EDITOR_DESCRIPTION
     parameters: dict = {
         "type": "object",

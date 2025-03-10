@@ -12,6 +12,7 @@ from app.tool.base import BaseTool
 
 class BingSearch(BaseTool):
     name: str = "bing_search"
+    short_description: str = "Perform Bing search and return a list of relevant links."
     description: str = """Perform Bing search and return a list of relevant links.
 Use this tool when you need to find information on the web, get the latest data, or research specific topics.
 This tool returns a list of URLs that match the search query.

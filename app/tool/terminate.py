@@ -6,6 +6,7 @@ _TERMINATE_DESCRIPTION = """Terminate the interaction when the request is met OR
 
 class Terminate(BaseTool):
     name: str = "terminate"
+    short_description: str = "Terminate the interaction when the request is met OR if the assistant cannot proceed further with the task."
     description: str = _TERMINATE_DESCRIPTION
     parameters: dict = {
         "type": "object",

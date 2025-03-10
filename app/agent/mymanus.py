@@ -25,7 +25,18 @@ class MyManus(ToolCallAgent):
     )
 
     system_prompt: str = SYSTEM_PROMPT
-    next_step_prompt: str = NEXT_STEP_PROMPT
+    next_step_prompt: str = """You can interact with the computer using PythonExecute, save important content and information files through FileSaver, open browsers with BrowserUseTool, and retrieve information using GoogleSearch.
+
+PythonExecute: Execute Python code to interact with the computer system, data processing, automation tasks, etc.
+
+FileSaver: Save files locally, such as txt, py, html, etc.
+
+BrowserUseTool: Open, browse, and use web browsers.If you open a local HTML file, you must provide the absolute path to the file.
+
+GoogleSearch: Perform web information retrieval
+
+Based on user needs, proactively select the most appropriate tool or combination of tools. For complex tasks, you can break down the problem and use different tools step by step to solve it. After using each tool, clearly explain the execution results and suggest the next steps.
+"""
 
     # Add general-purpose tools to the tool collection
     available_tools: ToolCollection = Field(
@@ -34,7 +45,7 @@ class MyManus(ToolCallAgent):
     
     @classmethod
     def _get_tool_mapping(cls):
-        """获取工具映射表"""
+        """Get tool mapping table"""
         return {
             "PythonExecute": PythonExecute,
             "GoogleSearch": GoogleSearch,
@@ -46,32 +57,71 @@ class MyManus(ToolCallAgent):
     
     @classmethod
     def _create_tool_collection(cls) -> ToolCollection:
-        """根据配置创建工具集合"""
-        # 获取配置的工具列表
+        """Create tool collection based on configuration"""
+        # Get configured tool list
         configured_tools = config.tools.tool_list
         
-        # 获取工具映射表
+        # Get tool mapping table
         tool_mapping = cls._get_tool_mapping()
         
-        # 如果配置的工具列表为空，使用默认工具
+        # If configured tool list is empty, use default tools
         if not configured_tools:
-            return ToolCollection(
+            # Use default tools
+            tool_instances = [
                 PythonExecute(),
                 BrowserUseTool(),
                 FileSaver(),
                 Terminate(),
                 BingSearch(),
-            )
+            ]
+        else:
+            # Create tool instances based on configuration
+            tool_instances = []
+            for tool_name in configured_tools:
+                if tool_name in tool_mapping:
+                    tool_class = tool_mapping[tool_name]
+                    tool_instances.append(tool_class())
+            
+            # Ensure at least one tool is available
+            if not tool_instances:
+                tool_instances.append(Terminate())
         
-        # 根据配置创建工具实例
-        tool_instances = []
-        for tool_name in configured_tools:
-            if tool_name in tool_mapping:
-                tool_class = tool_mapping[tool_name]
-                tool_instances.append(tool_class())
-        
-        # 确保至少有一个工具可用
-        if not tool_instances:
-            tool_instances.append(Terminate())
+        # Dynamically generate next_step_prompt
+        cls._update_next_step_prompt(tool_instances)
         
         return ToolCollection(*tool_instances)
+    
+    @classmethod
+    def _update_next_step_prompt(cls, tool_instances):
+        """Dynamically update next_step_prompt based on tool instances"""
+        # Generate tool introduction section
+        tool_descriptions = []
+        tool_details = []
+        
+        # Collect tool names and descriptions
+        for tool in tool_instances:
+            # Skip Terminate tool as it's for internal use
+            if tool.name == "terminate":
+                continue
+                
+            # Get tool class name (for display)
+            tool_class_name = tool.__class__.__name__
+            
+            # Add to tool list
+            tool_descriptions.append(tool_class_name)
+            
+            # Get tool's short description (first line)
+            short_desc = tool.short_description.strip()
+            tool_details.append(f"{tool_class_name}: {short_desc}")
+        
+        # Build prompt content
+        if tool_descriptions:
+            intro = f"You can interact with the computer using the following tools: {', '.join(tool_descriptions)}.\n\n"
+            details = "\n\n".join(tool_details)
+            conclusion = "\n\nBased on user needs, proactively select the most appropriate tool or combination of tools. For complex tasks, you can break down the problem and use different tools step by step to solve it. After using each tool, clearly explain the execution results and suggest the next steps."
+            
+            # Update next_step_prompt
+            cls.next_step_prompt = intro + details + conclusion
+        else:
+            # If no tools available, use default prompt
+            cls.next_step_prompt = NEXT_STEP_PROMPT

@@ -6,7 +6,8 @@ from app.tool.base import BaseTool
 
 
 class FileSaver(BaseTool):
-    name: str = "file_saver"
+    name: str = "file_saver"    
+    short_description: str = "Save files locally, such as txt, py, html, etc."
     description: str = """Save content to a local file at a specified path.
 Use this tool when you need to save text, code, or generated content to a file on the local filesystem.
 The tool accepts content and a file path, and saves the content to that location.

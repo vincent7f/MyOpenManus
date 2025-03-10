@@ -1,7 +1,7 @@
 import threading
 import tomllib
 from pathlib import Path
-from typing import Dict
+from typing import Dict, List
 
 from pydantic import BaseModel, Field
 
@@ -21,12 +21,20 @@ class LLMSettings(BaseModel):
     api_key: str = Field(..., description="API key")
     max_tokens: int = Field(4096, description="Maximum number of tokens per request")
     temperature: float = Field(1.0, description="Sampling temperature")
-    api_type: str = Field(..., description="AzureOpenai or Openai")
-    api_version: str = Field(..., description="Azure Openai version if AzureOpenai")
+    api_type: str = Field("", description="AzureOpenai or Openai")
+    api_version: str = Field("", description="Azure Openai version if AzureOpenai")
+
+
+class ToolsConfig(BaseModel):
+    tool_list: List[str] = Field(
+        default_factory=list,
+        description="List of enabled tools"
+    )
 
 
 class AppConfig(BaseModel):
     llm: Dict[str, LLMSettings]
+    tools: ToolsConfig = Field(default_factory=ToolsConfig)
 
 
 class Config:
@@ -82,6 +90,10 @@ class Config:
             "api_version": base_llm.get("api_version", ""),
         }
 
+        # 读取工具配置
+        tools_config = raw_config.get("tools", {})
+        tool_list = tools_config.get("tool_list", [])
+
         config_dict = {
             "llm": {
                 "default": default_settings,
@@ -89,6 +101,9 @@ class Config:
                     name: {**default_settings, **override_config}
                     for name, override_config in llm_overrides.items()
                 },
+            },
+            "tools": {
+                "tool_list": tool_list
             }
         }
 
@@ -97,6 +112,10 @@ class Config:
     @property
     def llm(self) -> Dict[str, LLMSettings]:
         return self._config.llm
+        
+    @property
+    def tools(self) -> ToolsConfig:
+        return self._config.tools
 
 
 config = Config()

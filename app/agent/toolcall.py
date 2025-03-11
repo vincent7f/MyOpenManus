@@ -66,6 +66,12 @@ class ToolCallAgent(ReActAgent):
         logger.info(
             f"🛠️ {self.name} selected {len(response.tool_calls) if response.tool_calls else 0} tools to use"
         )
+
+        if not response.tool_calls or len(response.tool_calls) <= 0:
+            logger.info(f"🤔 Hmm, {self.name} didn't select any tools to use, so it will stop thinking")
+            self.state = AgentState.FINISHED
+            return False
+
         if response.tool_calls:
             logger.info(
                 f"🧰 Tools being prepared: {[call.function.name for call in response.tool_calls]}"

@@ -5,15 +5,15 @@ https://github.com/mannaandpoem/OpenManus/blob/main/README_zh.md
 这个版本主要是对以下几方面进行了修改：
 
 1. 增加提供对bing.com的支持，方便国内用户使用。
-2. 增加自动结束检测，当AI不调用任何工具时，主动停止。
+2. 增加自动结束检测，当AI不调用任何工具时，主动停止。通过增加EndGame这个Tool，让AI去主动结束。
 
    详见ToolCallAgent类的think方法，增加了以下代码
 
    ```
-           if not response.tool_calls or len(response.tool_calls) <= 0:
-               logger.info(f"🤔 Hmm, {self.name} didn't select any tools to use, so it will stop thinking")
-               self.state = AgentState.FINISHED
-               return False
+   if "end_game" in [call.function.name for call in response.tool_calls]:
+      logger.info(f"🏁 Special tool 'EndGame' has completed the task!")
+      self.state = AgentState.FINISHED
+      return False
    ```
 3. 增加配置文件中指定那些工具可以，例如不需要google的话，直接注释掉就行了。
 
@@ -31,5 +31,4 @@ https://github.com/mannaandpoem/OpenManus/blob/main/README_zh.md
        "BingSearch",
    ]
    ```
-4. 增加了小量调用信息。
-
+4. 增加了小量调试信息。

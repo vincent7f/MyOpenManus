@@ -9,6 +9,7 @@ from app.tool.file_saver import FileSaver
 from app.tool.google_search import GoogleSearch
 from app.tool.python_execute import PythonExecute
 from app.tool.bing_search import BingSearch
+from app.tool.end_game import EndGame
 
 class MyManus(ToolCallAgent):
     """
@@ -42,6 +43,7 @@ class MyManus(ToolCallAgent):
             "FileSaver": FileSaver,
             "Terminate": Terminate,
             "BingSearch": BingSearch,
+            "EndGame": EndGame,
         }
     
     @classmethod
@@ -74,7 +76,10 @@ class MyManus(ToolCallAgent):
             # Ensure at least one tool is available
             if not tool_instances:
                 tool_instances.append(Terminate())
-        
+
+        # Ensure EndGame is always available
+        tool_instances.append(EndGame())
+
         # Dynamically generate next_step_prompt
         cls._update_next_step_prompt(tool_instances)
         
@@ -107,7 +112,7 @@ class MyManus(ToolCallAgent):
         if tool_descriptions:
             intro = f"You can interact with the computer using the following tools: {', '.join(tool_descriptions)}.\n\n"
             details = "\n\n".join(tool_details)
-            conclusion = "\n\nBased on user needs, proactively select the most appropriate tool or combination of tools. For complex tasks, you can break down the problem and use different tools step by step to solve it. After using each tool, clearly explain the execution results and suggest the next steps."
+            conclusion = "\n\nBased on user needs, proactively select the most appropriate tool or combination of tools. For complex tasks, you can break down the problem and use different tools step by step to solve it. After using each tool, clearly explain the execution results and suggest the next steps. EndGame is a special tool that will end the conversation when the task is completed. Check whether the tool EndGame should be used to end the conversation."
             
             # Update next_step_prompt
             cls.next_step_prompt = intro + details + conclusion

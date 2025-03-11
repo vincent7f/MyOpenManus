@@ -9,7 +9,7 @@ from app.logger import logger
 from app.prompt.toolcall import NEXT_STEP_PROMPT, SYSTEM_PROMPT
 from app.schema import AgentState, Message, ToolCall, TOOL_CHOICE_TYPE, ToolChoice
 from app.tool import CreateChatCompletion, Terminate, ToolCollection
-
+# from app.tool.end_game import EndGame
 
 TOOL_CALL_REQUIRED = "Tool calls required but none provided"
 
@@ -67,15 +67,19 @@ class ToolCallAgent(ReActAgent):
             f"🛠️ {self.name} selected {len(response.tool_calls) if response.tool_calls else 0} tools to use"
         )
 
-        if not response.tool_calls or len(response.tool_calls) <= 0:
-            logger.info(f"🤔 Hmm, {self.name} didn't select any tools to use, so it will stop thinking")
-            self.state = AgentState.FINISHED
-            return False
+        # if not response.tool_calls or len(response.tool_calls) <= 0:
+        #     logger.info(f"🤔 Hmm, {self.name} didn't select any tools to use, so it will stop thinking")
+        #     self.state = AgentState.FINISHED
+        #     return False
 
         if response.tool_calls:
             logger.info(
                 f"🧰 Tools being prepared: {[call.function.name for call in response.tool_calls]}"
             )
+            if "end_game" in [call.function.name for call in response.tool_calls]:
+                logger.info(f"🏁 Special tool 'EndGame' has completed the task!")
+                self.state = AgentState.FINISHED
+                return False
 
         try:
             # Handle different tool_choices modes

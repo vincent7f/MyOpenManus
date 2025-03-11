@@ -41,13 +41,13 @@ class ToolCallAgent(ReActAgent):
         # Log parameter values
         system_msgs = [Message.system_message(self.system_prompt)] if self.system_prompt else None
         tools = self.available_tools.to_params()        
-        logger.info("-"*100)
-        logger.info(f"📝 {self.name} parameters for self.llm.ask_tool()")
-        logger.info(f"📝 {self.name} parameter info: messages count={len(self.messages)}")
-        logger.info(f"📝 {self.name} parameter info: system_msgs={system_msgs}")
-        logger.info(f"📝 {self.name} parameter info: tools={tools}")
-        logger.info(f"📝 {self.name} parameter info: tool_choice={self.tool_choices}")
-        logger.info("-"*100)
+        # logger.info("-"*100)
+        # logger.info(f"📝 {self.name} parameters for self.llm.ask_tool()")
+        # logger.info(f"📝 {self.name} parameter info: messages count={len(self.messages)}")
+        # logger.info(f"📝 {self.name} parameter info: system_msgs={system_msgs}")
+        # logger.info(f"📝 {self.name} parameter info: tools={tools}")
+        # logger.info(f"📝 {self.name} parameter info: tool_choice={self.tool_choices}")
+        # logger.info("-"*100)
         # Get response with tool options
         response = await self.llm.ask_tool(
             messages=self.messages,

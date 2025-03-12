@@ -1,5 +1,7 @@
 English | [中文](README_zh.md) | [한국어](README_ko.md) | [日本語](README_ja.md)
 
+NOTE: This page is generated and translated by Cursor.
+
 For OpenManus documentation, please refer to the official GitHub:
 https://github.com/mannaandpoem/OpenManus/blob/main/README.md
 
@@ -34,13 +36,24 @@ This version has been modified in the following aspects:
    ```
 4. Added minor debugging information.
 5. Added a sandbox directory. New files can only be saved in this directory, enhancing file security.
-
 6. Added StoryCreator tool for generating creative stories.
+
    - Supports generating original stories based on user-provided prompts
    - Can specify the genre of the story (e.g., fantasy, sci-fi, horror, etc.)
    - Can control the length of the story (short, medium, long)
    - Can specify writing style (e.g., descriptive, concise, poetic, etc.)
    - Can specify main characters to include in the story
-   
-   See `examples/story_creator_example.py` for usage examples.
 
+   **Story Example: Guan Yu vs Qin Qiong**
+
+   > PROMPT: Write a short story about Guan Yu fighting Qin Qiong, around 600 words, and save the story
+   >
+
+   [https://github.com/vincent7f/MyOpenManus/blob/main/results/%E5%85%B3%E5%85%AC%E6%88%98%E7%A7%A6%E7%90%BC.md](https://github.com/vincent7f/MyOpenManus/blob/main/results/%E5%85%B3%E5%85%AC%E6%88%98%E7%A7%A6%E7%90%BC.md)
+
+   **Composition Example: Environmental Short Story**
+
+   > PROMPT (AI-generated): Please write a short story about environmental protection in a sci-fi style, with the main character being a cat that can communicate with humans.
+   >
+
+   [https://github.com/vincent7f/MyOpenManus/blob/main/results/%E7%8E%AF%E4%BF%9D%E7%9A%84%E7%9F%AD%E6%95%85%E4%BA%8B.txt](https://github.com/vincent7f/MyOpenManus/blob/main/results/%E7%8E%AF%E4%BF%9D%E7%9A%84%E7%9F%AD%E6%95%85%E4%BA%8B.txt)

@@ -10,6 +10,7 @@ from app.tool.google_search import GoogleSearch
 from app.tool.python_execute import PythonExecute
 from app.tool.bing_search import BingSearch
 from app.tool.end_game import EndGame
+from app.tool.story_creator import StoryCreator
 
 class MyManus(ToolCallAgent):
     """
@@ -43,6 +44,7 @@ class MyManus(ToolCallAgent):
             "FileSaver": FileSaver,
             "Terminate": Terminate,
             "BingSearch": BingSearch,
+            "StoryCreator": StoryCreator,
             "EndGame": EndGame,
         }
     
@@ -64,6 +66,7 @@ class MyManus(ToolCallAgent):
                 FileSaver(),
                 Terminate(),
                 BingSearch(),
+                StoryCreator(),
             ]
         else:
             # Create tool instances based on configuration
@@ -79,6 +82,8 @@ class MyManus(ToolCallAgent):
 
         # Ensure EndGame is always available
         tool_instances.append(EndGame())
+
+        
 
         # Dynamically generate next_step_prompt
         cls._update_next_step_prompt(tool_instances)
@@ -112,7 +117,7 @@ class MyManus(ToolCallAgent):
         if tool_descriptions:
             intro = f"You can interact with the computer using the following tools: {', '.join(tool_descriptions)}.\n\n"
             details = "\n\n".join(tool_details)
-            conclusion = "\n\nBased on user needs, proactively select the most appropriate tool or combination of tools. For complex tasks, you can break down the problem and use different tools step by step to solve it. After using each tool, clearly explain the execution results and suggest the next steps. EndGame is a special tool that will end the conversation when the task is completed. Check whether the tool EndGame should be used to end the conversation. You are allowed to use only tool in each step."
+            conclusion = "\n\nBased on user needs, proactively select the most appropriate tool or combination of tools. For complex tasks, you can break down the problem and use different tools step by step to solve it. After using each tool, clearly explain the execution results and suggest the next steps. EndGame is a special tool to tell the user that the task is completed and user should not send any follow-up action to your."
             
             # Update next_step_prompt
             cls.next_step_prompt = intro + details + conclusion

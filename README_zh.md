@@ -31,6 +31,16 @@ https://github.com/mannaandpoem/OpenManus/blob/main/README_zh.md
        "BingSearch",
    ]
    ```
+   
 4. 增加了小量调试信息。
 
 5. 增加sandbox目录。新建的文件只能在保存在这个目录里，增加文件安全性。
+
+6. 增加StoryCreator工具，用于生成创意故事。
+   - 支持根据用户提供的提示生成原创故事
+   - 可以指定故事的体裁（如奇幻、科幻、恐怖等）
+   - 可以控制故事的长度（短、中、长）
+   - 可以指定写作风格（如描述性、简洁、诗意等）
+   - 可以指定故事中的主要角色
+   
+   使用示例可参考`examples/story_creator_example.py`文件。

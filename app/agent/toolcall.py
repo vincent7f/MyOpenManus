@@ -76,7 +76,7 @@ class ToolCallAgent(ReActAgent):
             logger.info(
                 f"🧰 Tools being prepared: {[call.function.name for call in response.tool_calls]}"
             )
-            if "end_game" in [call.function.name for call in response.tool_calls]:
+            if "end_game" in [call.function.name for call in response.tool_calls] and len(response.tool_calls) == 1:
                 logger.info(f"🏁 Special tool 'EndGame' has completed the task!")
                 self.state = AgentState.FINISHED
                 return False

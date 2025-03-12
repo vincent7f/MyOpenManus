@@ -35,3 +35,12 @@ This version has been modified in the following aspects:
 4. Added minor debugging information.
 5. Added a sandbox directory. New files can only be saved in this directory, enhancing file security.
 
+6. Added StoryCreator tool for generating creative stories.
+   - Supports generating original stories based on user-provided prompts
+   - Can specify the genre of the story (e.g., fantasy, sci-fi, horror, etc.)
+   - Can control the length of the story (short, medium, long)
+   - Can specify writing style (e.g., descriptive, concise, poetic, etc.)
+   - Can specify main characters to include in the story
+   
+   See `examples/story_creator_example.py` for usage examples.
+

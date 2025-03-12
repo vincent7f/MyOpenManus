@@ -32,3 +32,5 @@ https://github.com/mannaandpoem/OpenManus/blob/main/README_zh.md
    ]
    ```
 4. 增加了小量调试信息。
+
+5. 增加sandbox目录。新建的文件只能在保存在这个目录里，增加文件安全性。

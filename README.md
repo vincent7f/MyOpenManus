@@ -33,4 +33,5 @@ This version has been modified in the following aspects:
    ]
    ```
 4. Added minor debugging information.
+5. Added a sandbox directory. New files can only be saved in this directory, enhancing file security.
 

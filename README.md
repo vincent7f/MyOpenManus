@@ -2,6 +2,8 @@ English | [中文](README_zh.md)
 
 NOTE: This page is generated and translated by Cursor.
 
+NOTE: This page is generated and translated by Cursor.
+
 For OpenManus documentation, please refer to the official GitHub:
 https://github.com/mannaandpoem/OpenManus/blob/main/README.md
 

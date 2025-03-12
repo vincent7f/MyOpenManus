@@ -112,7 +112,7 @@ class MyManus(ToolCallAgent):
         if tool_descriptions:
             intro = f"You can interact with the computer using the following tools: {', '.join(tool_descriptions)}.\n\n"
             details = "\n\n".join(tool_details)
-            conclusion = "\n\nBased on user needs, proactively select the most appropriate tool or combination of tools. For complex tasks, you can break down the problem and use different tools step by step to solve it. After using each tool, clearly explain the execution results and suggest the next steps. EndGame is a special tool that will end the conversation when the task is completed. Check whether the tool EndGame should be used to end the conversation."
+            conclusion = "\n\nBased on user needs, proactively select the most appropriate tool or combination of tools. For complex tasks, you can break down the problem and use different tools step by step to solve it. After using each tool, clearly explain the execution results and suggest the next steps. EndGame is a special tool that will end the conversation when the task is completed. Check whether the tool EndGame should be used to end the conversation. You are allowed to use only tool in each step."
             
             # Update next_step_prompt
             cls.next_step_prompt = intro + details + conclusion

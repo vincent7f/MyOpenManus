@@ -9,6 +9,7 @@ async def main():
     while True:
         try:
             prompt = input("Enter your prompt (or 'exit'/'quit' to quit): ")
+            
             prompt_lower = prompt.lower()
             if prompt_lower in ["exit", "quit"]:
                 logger.info("Goodbye!")
@@ -16,6 +17,7 @@ async def main():
             if not prompt.strip():
                 logger.warning("Skipping empty prompt.")
                 continue
+            logger.info(f"Received prompt: {prompt}")
             logger.warning("Processing your request...")
             await agent.run(prompt)
         except KeyboardInterrupt:

@@ -1,8 +1,10 @@
 import os
-
 import aiofiles
 
+
+from pathlib import Path
 from app.tool.base import BaseTool
+from app.config import OUTPUT_ROOT
 
 
 class FileSaver(BaseTool):
@@ -45,15 +47,20 @@ The tool accepts content and a file path, and saves the content to that location
             str: A message indicating the result of the operation.
         """
         try:
+            # Extract just the filename and relative path, removing any absolute path components
+            # This ensures we don't allow writing outside of OUTPUT_ROOT
+            file_name = Path(file_path).name            
+            
+            # Create the full path within OUTPUT_ROOT
+            full_path = OUTPUT_ROOT / file_name
+            
             # Ensure the directory exists
-            directory = os.path.dirname(file_path)
-            if directory and not os.path.exists(directory):
-                os.makedirs(directory)
+            full_path.parent.mkdir(parents=True, exist_ok=True)
 
             # Write directly to the file
-            async with aiofiles.open(file_path, mode, encoding="utf-8") as file:
+            async with aiofiles.open(full_path, mode, encoding="utf-8") as file:
                 await file.write(content)
 
-            return f"Content successfully saved to {file_path}"
+            return f"Content successfully saved to {full_path}"
         except Exception as e:
             return f"Error saving file: {str(e)}"

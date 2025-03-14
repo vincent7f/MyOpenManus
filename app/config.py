@@ -132,7 +132,10 @@ class Config:
             },
             "tools": {
                 "tool_list": tool_list
-            }
+            },
+
+            "browser_config": browser_settings,
+
         }
 
         self._config = AppConfig(**config_dict)

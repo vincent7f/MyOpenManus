@@ -1,4 +1,4 @@
-English | [简体中文](README_zh.md)
+English | [中文](README_zh.md) | [한국어](README_ko.md) | [日本語](README_ja.md)
 
 NOTE: This page is generated and translated by Cursor.
 
@@ -9,6 +9,7 @@ This version has been modified in the following aspects:
 
 1. Added support for bing.com, making it more convenient for users in China.
 2. Added automatic termination detection, which actively stops when AI does not call any tools. This is done through the addition of an EndGame Tool that allows AI to actively end the process.
+
 
    See the think method in the ToolCallAgent class, which added the following code:
 

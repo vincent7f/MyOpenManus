@@ -1,9 +1,9 @@
-[English](README.md) | 简体中文
 
 OpenManus的说明，请详见官方github:
 https://github.com/mannaandpoem/OpenManus/blob/main/README_zh.md
 
 这个版本主要是对以下几方面进行了修改：
+
 
 1. 增加提供对bing.com的支持，方便国内用户使用。
 2. 增加自动结束检测，当AI不调用任何工具时，主动停止。通过增加EndGame这个Tool，让AI去主动结束。
@@ -54,5 +54,5 @@ https://github.com/mannaandpoem/OpenManus/blob/main/README_zh.md
    > PROMPT(AI自己生成的): 请帮我写一篇关于环保的短故事，要求是科幻风格，主角是一只能够和人类沟通的猫。
    >
 
-   [https://github.com/vincent7f/MyOpenManus/blob/main/results/%E7%8E%AF%E4%BF%9D%E7%9A%84%E7%9F%AD%E6%95%85%E4%BA%8B.txt]
-   (https://github.com/vincent7f/MyOpenManus/blob/main/results/%E7%8E%AF%E4%BF%9D%E7%9A%84%E7%9F%AD%E6%95%85%E4%BA%8B.txt)
+   [https://github.com/vincent7f/MyOpenManus/blob/main/results/%E7%8E%AF%E4%BF%9D%E7%9A%84%E7%9F%AD%E6%95%85%E4%BA%8B.txt](https://github.com/vincent7f/MyOpenManus/blob/main/results/%E7%8E%AF%E4%BF%9D%E7%9A%84%E7%9F%AD%E6%95%85%E4%BA%8B.txt)
+

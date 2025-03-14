@@ -34,24 +34,22 @@ async def main():
     log_config_info()
     
     agent = MyManus()
-    while True:
-        try:
-            prompt = input("Enter your prompt (or 'exit'/'quit' to quit): ")
-            
-            prompt_lower = prompt.lower()
-            if prompt_lower in ["exit", "quit"]:
-                logger.info("Goodbye!")
-                break
-            if not prompt.strip():
-                logger.warning("Skipping empty prompt.")
-                continue
-            logger.info(f"Received prompt: {prompt}")
-            logger.warning("Processing your request...")
-            await agent.run(prompt)
-        except KeyboardInterrupt:
-            logger.warning("Goodbye!")
-            break
+    # agent = Manus()
 
+    try:
+        prompt = input("Enter your prompt: ")
+        if not prompt.strip():
+            logger.warning("Empty prompt provided.")
+            return
+        
+        # log prompt
+        logger.info(f"Received prompt: {prompt}")
+
+        logger.warning("Processing your request...")
+        await agent.run(prompt)
+        logger.info("Request processing completed.")
+    except KeyboardInterrupt:
+        logger.warning("Operation interrupted.")
 
 if __name__ == "__main__":
     asyncio.run(main())

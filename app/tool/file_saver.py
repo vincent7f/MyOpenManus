@@ -4,7 +4,7 @@ import aiofiles
 
 from pathlib import Path
 from app.tool.base import BaseTool
-from app.config import OUTPUT_ROOT
+from app.config import WORKSPACE_ROOT
 
 
 class FileSaver(BaseTool):
@@ -52,7 +52,7 @@ The tool accepts content and a file path, and saves the content to that location
             file_name = Path(file_path).name            
             
             # Create the full path within OUTPUT_ROOT
-            full_path = OUTPUT_ROOT / file_name
+            full_path = WORKSPACE_ROOT / file_name
             
             # Ensure the directory exists
             full_path.parent.mkdir(parents=True, exist_ok=True)

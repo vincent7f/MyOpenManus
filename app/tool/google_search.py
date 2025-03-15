@@ -44,7 +44,7 @@ The tool returns a list of URLs that match the search query.
         if cls._proxy_initialized is True:
             logger.info("Proxy settings already initialized. Using cached proxy settings.")
             return cls._proxy_str
-        
+
         cls._proxy_initialized = True
         if config.browser_config and config.browser_config.proxy:
             logger.info("Proxy settings found in config")
@@ -56,6 +56,7 @@ The tool returns a list of URLs that match the search query.
                 cls._proxy_str = cls._proxy_str.replace("://", f"://{proxy_auth}")
         else:
             logger.info("No proxy settings found in config")
+            cls._proxy_str = None
         
         return cls._proxy_str
 

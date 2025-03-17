@@ -4,8 +4,6 @@ https://github.com/mannaandpoem/OpenManus/blob/main/README_zh.md
 
 这个版本主要是对以下几方面进行了修改：
 
-这个版本主要是对以下几方面进行了修改：
-
 1. 增加提供对bing.com的支持，方便国内用户使用。
 2. 增加自动结束检测，当AI不调用任何工具时，主动停止。通过增加EndGame这个Tool，让AI去主动结束。
 

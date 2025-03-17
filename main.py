@@ -38,13 +38,15 @@ async def main():
         if not prompt.strip():
             logger.warning("Empty prompt provided.")
             return
+        
+        # log prompt
+        logger.info(f"Received prompt: {prompt}")
 
         logger.warning("Processing your request...")
         await agent.run(prompt)
         logger.info("Request processing completed.")
     except KeyboardInterrupt:
         logger.warning("Operation interrupted.")
-
 
 if __name__ == "__main__":
     asyncio.run(main())

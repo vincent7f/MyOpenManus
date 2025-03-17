@@ -31,7 +31,9 @@ class ToolCallAgent(ReActAgent):
 
     tool_calls: List[ToolCall] = Field(default_factory=list)
 
-    max_steps: int = 30
+
+    max_steps: int = 60
+
     max_observe: Optional[Union[int, bool]] = None
 
     async def think(self) -> bool:

@@ -1,6 +1,7 @@
 import threading
 import tomllib
 from pathlib import Path
+
 from typing import Dict, List, Optional
 
 from pydantic import BaseModel, Field
@@ -62,7 +63,15 @@ class BrowserSettings(BaseModel):
 
 class AppConfig(BaseModel):
     llm: Dict[str, LLMSettings]
+
     tools: ToolsConfig = Field(default_factory=ToolsConfig)
+
+    browser_config: Optional[BrowserSettings] = Field(
+        None, description="Browser configuration"
+    )
+
+    class Config:
+        arbitrary_types_allowed = True
 
 
 class Config:
@@ -118,9 +127,44 @@ class Config:
             "api_version": base_llm.get("api_version", ""),
         }
 
+
         # 读取工具配置
         tools_config = raw_config.get("tools", {})
         tool_list = tools_config.get("tool_list", [])
+
+        # handle browser config.
+        browser_config = raw_config.get("browser", {})
+        browser_settings = None
+
+        if browser_config:
+            # handle proxy settings.
+            proxy_config = browser_config.get("proxy", {})
+            proxy_settings = None
+
+            if proxy_config and proxy_config.get("server"):
+                proxy_settings = ProxySettings(
+                    **{
+                        k: v
+                        for k, v in proxy_config.items()
+                        if k in ["server", "username", "password"] and v
+                    }
+                )
+
+            # filter valid browser config parameters.
+            valid_browser_params = {
+                k: v
+                for k, v in browser_config.items()
+                if k in BrowserSettings.__annotations__ and v is not None
+            }
+
+            # if there is proxy settings, add it to the parameters.
+            if proxy_settings:
+                valid_browser_params["proxy"] = proxy_settings
+
+            # only create BrowserSettings when there are valid parameters.
+            if valid_browser_params:
+                browser_settings = BrowserSettings(**valid_browser_params)
+
 
         config_dict = {
             "llm": {
